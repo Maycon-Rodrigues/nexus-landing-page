@@ -12,13 +12,19 @@ const LandingPage: React.FC = () => {
   const t = translations[initialLanguage].landing;
 
   useEffect(() => {
+    // Auto-detect language
+    const browserLang = navigator.language;
+    if (browserLang.toLowerCase().startsWith('pt')) {
+      setLanguage('pt-BR');
+    }
+
     const handleMouseMove = (e: MouseEvent) => {
       setMousePos({ x: e.clientX, y: e.clientY });
     };
     
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  }, [setLanguage]);
 
   const toggleLang = () => {
     setLanguage(initialLanguage === 'en-US' ? 'pt-BR' : 'en-US');
