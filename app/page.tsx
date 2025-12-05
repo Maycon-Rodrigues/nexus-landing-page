@@ -1,14 +1,24 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { translations } from '../translations';
 import { Brain, Mic, Image as ImageIcon, Zap, Check, ArrowRight, Globe, CornerDownRight } from 'lucide-react';
 import { useGameStore } from '../stores/useGameStore';
 
 const LandingPage: React.FC = () => {
   const { initialLanguage, setLanguage, setShowLanding } = useGameStore();
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   
   const t = translations[initialLanguage].landing;
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   const toggleLang = () => {
     setLanguage(initialLanguage === 'en-US' ? 'pt-BR' : 'en-US');
@@ -26,6 +36,14 @@ const LandingPage: React.FC = () => {
          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-5 mix-blend-overlay"></div>
          <div className="absolute inset-0 bg-gradient-to-b from-blue-900/5 via-transparent to-purple-900/5"></div>
       </div>
+
+      {/* Mouse Spotlight */}
+      <div 
+        className="fixed inset-0 z-[2] pointer-events-none transition-opacity duration-300"
+        style={{
+          background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, rgba(29, 78, 216, 0.15), transparent 80%)`
+        }}
+      />
 
       <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -48,8 +66,14 @@ const LandingPage: React.FC = () => {
       </nav>
 
       <header className="relative pt-32 pb-20 px-6 md:pt-48 md:pb-32 overflow-hidden z-10">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px] -z-10 animate-pulse-slow"></div>
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[100px] -z-10"></div>
+        <div 
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px] -z-10 transition-transform duration-1000 ease-out"
+          style={{ transform: `translate(calc(-50% + ${mousePos.x * 0.02}px), ${mousePos.y * 0.02}px)` }}
+        ></div>
+        <div 
+          className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[100px] -z-10 transition-transform duration-1000 ease-out"
+          style={{ transform: `translate(${-mousePos.x * 0.02}px, ${-mousePos.y * 0.02}px)` }}
+        ></div>
 
         <div className="max-w-5xl mx-auto text-center space-y-10 animate-fade-in">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-900/10 text-blue-300 text-[10px] font-mono uppercase tracking-widest mb-4">
