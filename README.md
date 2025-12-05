@@ -29,7 +29,7 @@ This is the landing page for the **Nexus Engine**, an AI-powered RPG Narrative E
 
 1.  Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/nexus-landing-page.git
+    git clone https://github.com/Maycon-Rodrigues/nexus-landing-page.git
     cd nexus-landing-page
     ```
 
