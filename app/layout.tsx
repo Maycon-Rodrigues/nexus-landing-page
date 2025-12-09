@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono, Merriweather } from "next/font/google";
 import "./globals.css";
 
+import BackgroundEffects from "./components/BackgroundEffects";
+
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -31,9 +33,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} ${merriweather.variable} antialiased bg-black text-gray-100`}
+        className={`${inter.variable} ${jetbrainsMono.variable} ${merriweather.variable} antialiased bg-black text-gray-100 relative`}
       >
-        {children}
+        <BackgroundEffects />
+        <div className="relative z-10">
+          {children}
+        </div>
       </body>
     </html>
   );
