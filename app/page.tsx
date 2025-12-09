@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { translations } from '../translations';
-import { Brain, Mic, Image as ImageIcon, Zap, Check, ArrowRight, Globe, CornerDownRight } from 'lucide-react';
+import { Brain, Mic, Image as ImageIcon, Zap, Check, ArrowRight, Globe, CornerDownRight, Code, Database, Cpu } from 'lucide-react';
 import { useGameStore } from '../stores/useGameStore';
 
 const LandingPage: React.FC = () => {
@@ -27,13 +27,9 @@ const LandingPage: React.FC = () => {
   }
 
   return (
-    <div className="h-screen w-full bg-black text-gray-100 font-sans overflow-y-auto overflow-x-hidden selection:bg-blue-500 selection:text-white custom-scrollbar">
+    <div className="h-screen w-full text-gray-100 font-sans overflow-y-auto overflow-x-hidden selection:bg-blue-500 selection:text-white custom-scrollbar">
       
-      {/* VFX Overlays */}
-      <div className="fixed inset-0 z-[1] pointer-events-none">
-         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-5 mix-blend-overlay"></div>
-         <div className="absolute inset-0 bg-gradient-to-b from-blue-900/5 via-transparent to-purple-900/5"></div>
-      </div>
+
 
       <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -58,6 +54,12 @@ const LandingPage: React.FC = () => {
       <header className="relative pt-32 pb-20 px-6 md:pt-48 md:pb-32 overflow-hidden z-10">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px] -z-10 animate-float"></div>
         <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[100px] -z-10 animate-float-delayed"></div>
+        
+        {/* Floating Tech Elements */}
+        <Code className="absolute top-[20%] left-[10%] w-12 h-12 text-blue-500/20 animate-float rotate-12" />
+        <Database className="absolute bottom-[30%] right-[10%] w-16 h-16 text-purple-500/20 animate-float-delayed -rotate-12" />
+        <Cpu className="absolute top-[30%] right-[20%] w-8 h-8 text-cyan-500/20 animate-pulse-slow" />
+
 
         <div className="max-w-5xl mx-auto text-center space-y-10 animate-fade-in">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-900/10 text-blue-300 text-[10px] font-mono uppercase tracking-widest mb-4">
@@ -99,7 +101,7 @@ const LandingPage: React.FC = () => {
         </div>
       </header>
 
-      <section className="py-24 bg-black border-y border-white/5 relative z-10">
+      <section className="py-24 bg-black/40 backdrop-blur-md border-y border-white/5 relative z-10">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
             <h2 className="text-xs font-mono uppercase tracking-[0.3em] text-blue-500 mb-4 flex items-center justify-center gap-2">
@@ -173,7 +175,7 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      <footer className="py-12 text-center border-t border-white/5 relative z-10 bg-black">
+      <footer className="py-12 text-center border-t border-white/5 relative z-10 bg-black/60 backdrop-blur-md">
         <div className="flex items-center justify-center gap-2 mb-4 opacity-50">
             <div className="w-1 h-1 bg-white rounded-full"></div>
             <div className="w-1 h-1 bg-white rounded-full"></div>
